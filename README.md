@@ -5,6 +5,7 @@
 *.js (JavaScript + jQuery + JSON + AngujarJS)
 *.php (RESTful Web Service en PHP)
 
+*test with idea!!!
 
 "scripts_db" tiene scripts de la BD:
 
