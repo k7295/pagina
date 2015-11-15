@@ -274,7 +274,7 @@ BEGIN
 					on ip.idIngrediente = ci.idIngrediente
 				left join categorias_ingredientes_restaurantes cr
 					on cr.idCategoria = ci.idCategoria
-			where cr.idCategoria = null;
+			where cr.idCategoria is null;
 	end if;
 END */;;
 DELIMITER ;
