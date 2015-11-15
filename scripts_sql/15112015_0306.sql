@@ -11,7 +11,7 @@ USE `sistemarestaurantes`;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40103 SET TIME_ZONE='-06:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
@@ -79,7 +79,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`carritos_compras_BEFORE_INSERT` BEFORE INSERT ON `carritos_compras` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`carritos_compras_BEFORE_INSERT` BEFORE INSERT ON `carritos_compras` FOR EACH ROW
 BEGIN
 	if (not exists (select 1 from usuarios_clientes
 			where (idUsuario = new.idCliente)
@@ -119,7 +119,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`carritos_compras_BEFORE_DELETE` BEFORE DELETE ON `carritos_compras` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`carritos_compras_BEFORE_DELETE` BEFORE DELETE ON `carritos_compras` FOR EACH ROW
 BEGIN
 	if (not exists (select 1 from usuarios_clientes
 			where (idUsuario = old.idCliente)
@@ -174,7 +174,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_BEFORE_INSERT` BEFORE INSERT ON `categorias` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_BEFORE_INSERT` BEFORE INSERT ON `categorias` FOR EACH ROW
 BEGIN
 	if (exists (select 1 from categorias where nombre = new.nombre)) then
 		signal	sqlstate '45000'
@@ -222,7 +222,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_BEFORE_INSERT` BEFORE INSERT ON `categorias_ingredientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_BEFORE_INSERT` BEFORE INSERT ON `categorias_ingredientes` FOR EACH ROW
 BEGIN
 	if (not exists (select 1
 		from categorias
@@ -261,7 +261,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_BEFORE_UPDATE` BEFORE UPDATE ON `categorias_ingredientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_BEFORE_UPDATE` BEFORE UPDATE ON `categorias_ingredientes` FOR EACH ROW
 BEGIN
 	if (not exists (select 1
 		from categorias
@@ -300,7 +300,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_AFTER_UPDATE` AFTER UPDATE ON `categorias_ingredientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_AFTER_UPDATE` AFTER UPDATE ON `categorias_ingredientes` FOR EACH ROW
 BEGIN
 	if (old.idCategoria != new.idCategoria) then
     	/* Borra los platillos de los menús de los restaurantes donde 
@@ -356,7 +356,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_BEFORE_INSERT` BEFORE INSERT ON `categorias_ingredientes_restaurantes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_BEFORE_INSERT` BEFORE INSERT ON `categorias_ingredientes_restaurantes` FOR EACH ROW
 BEGIN
 	if (not exists (select 1
 		from categorias
@@ -395,7 +395,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_BEFORE_UPDATE` BEFORE UPDATE ON `categorias_ingredientes_restaurantes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_BEFORE_UPDATE` BEFORE UPDATE ON `categorias_ingredientes_restaurantes` FOR EACH ROW
 BEGIN
 	if (not exists (select 1
 		from categorias
@@ -434,7 +434,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_AFTER_UPDATE` AFTER UPDATE ON `categorias_ingredientes_restaurantes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_AFTER_UPDATE` AFTER UPDATE ON `categorias_ingredientes_restaurantes` FOR EACH ROW
 BEGIN
 	if (old.idCategoria != new.idCategoria) then
 		delete mr
@@ -463,7 +463,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_AFTER_DELETE` AFTER DELETE ON `categorias_ingredientes_restaurantes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_AFTER_DELETE` AFTER DELETE ON `categorias_ingredientes_restaurantes` FOR EACH ROW
 BEGIN
     	/* Borra los platillos de los menús de los restaurantes donde 
         la categoría no está soportada */
@@ -517,7 +517,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`compras_efectivo_clientes_BEFORE_INSERT` BEFORE INSERT ON `compras_efectivo_clientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`compras_efectivo_clientes_BEFORE_INSERT` BEFORE INSERT ON `compras_efectivo_clientes` FOR EACH ROW
 BEGIN
 	if (not exists (select 1
 		from ordenes_compra
@@ -589,7 +589,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`compras_tarjeta_clientes_BEFORE_INSERT` BEFORE INSERT ON `compras_tarjeta_clientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`compras_tarjeta_clientes_BEFORE_INSERT` BEFORE INSERT ON `compras_tarjeta_clientes` FOR EACH ROW
 BEGIN
 	if (not exists (select 1
 		from ordenes_compra
@@ -709,7 +709,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`ingredientes_BEFORE_INSERT` BEFORE INSERT ON `ingredientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`ingredientes_BEFORE_INSERT` BEFORE INSERT ON `ingredientes` FOR EACH ROW
 BEGIN
 	if (exists (select 1 from ingredientes where nombre = new.nombre)) then
 		signal	sqlstate '45000'
@@ -736,7 +736,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`ingredientes_BEFORE_UPDATE` BEFORE UPDATE ON `ingredientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`ingredientes_BEFORE_UPDATE` BEFORE UPDATE ON `ingredientes` FOR EACH ROW
 BEGIN
 	if (exists (select 1 from ingredientes where nombre = new.nombre)) then
 		signal	sqlstate '45000'
@@ -790,7 +790,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`ingredientes_platillos_BEFORE_INSERT` BEFORE INSERT ON `ingredientes_platillos` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`ingredientes_platillos_BEFORE_INSERT` BEFORE INSERT ON `ingredientes_platillos` FOR EACH ROW
 BEGIN
 	if (not exists (select 1 from ingredientes where id = new.idIngrediente)) then
 		signal	sqlstate '45000'
@@ -830,7 +830,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`ingredientes_platillos_AFTER_INSERT` AFTER INSERT ON `ingredientes_platillos` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`ingredientes_platillos_AFTER_INSERT` AFTER INSERT ON `ingredientes_platillos` FOR EACH ROW
 BEGIN
 	delete mr
 		from menu_restaurantes mr
@@ -887,7 +887,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`inventario_restaurantes_BEFORE_INSERT` BEFORE INSERT ON `inventario_restaurantes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`inventario_restaurantes_BEFORE_INSERT` BEFORE INSERT ON `inventario_restaurantes` FOR EACH ROW
 BEGIN
 	if	(not exists (select 1 from restaurantes where id = new.idRestaurante)) then
 		signal	sqlstate '45000'
@@ -960,7 +960,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`menu_restaurantes_BEFORE_INSERT` BEFORE INSERT ON `menu_restaurantes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`menu_restaurantes_BEFORE_INSERT` BEFORE INSERT ON `menu_restaurantes` FOR EACH ROW
 BEGIN
 	-- El restaurante debe estar registrado.
 	if	(not exists (select 1 from restaurantes where id = new.idRestaurante)) then
@@ -1050,7 +1050,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`ordenes_compra_BEFORE_INSERT` BEFORE INSERT ON `ordenes_compra` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`ordenes_compra_BEFORE_INSERT` BEFORE INSERT ON `ordenes_compra` FOR EACH ROW
 BEGIN
 	if (not exists (select 1
 		from usuarios_clientes
@@ -1110,7 +1110,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`platillos_BEFORE_INSERT` BEFORE INSERT ON `platillos` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`platillos_BEFORE_INSERT` BEFORE INSERT ON `platillos` FOR EACH ROW
 BEGIN
 	if (exists (select 1
 		from platillos
@@ -1166,7 +1166,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`platillos_ordenes_compra_BEFORE_INSERT` BEFORE INSERT ON `platillos_ordenes_compra` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`platillos_ordenes_compra_BEFORE_INSERT` BEFORE INSERT ON `platillos_ordenes_compra` FOR EACH ROW
 BEGIN
 	if (not exists (select 1
 		from ordenes
@@ -1238,7 +1238,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`restaurantes_BEFORE_INSERT` BEFORE INSERT ON `restaurantes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`restaurantes_BEFORE_INSERT` BEFORE INSERT ON `restaurantes` FOR EACH ROW
 BEGIN
 	if	(not exists (select 1 from categorias where id = new.idCategoria)) then
 		signal	sqlstate '45000'
@@ -1292,7 +1292,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_BEFORE_INSERT` BEFORE INSERT ON `usuarios` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_BEFORE_INSERT` BEFORE INSERT ON `usuarios` FOR EACH ROW
 BEGIN
 	if (exists (select 1 from usuarios where eMail = new.eMail)) then
 		signal	sqlstate '45000'
@@ -1314,7 +1314,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_BEFORE_UPDATE` BEFORE UPDATE ON `usuarios` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_BEFORE_UPDATE` BEFORE UPDATE ON `usuarios` FOR EACH ROW
 BEGIN
 	if (not exists (select 1 from usuarios where eMail = new.eMail)) then
 		signal	sqlstate '45000'
@@ -1360,7 +1360,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_administradores_BEFORE_INSERT` BEFORE INSERT ON `usuarios_administradores` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_administradores_BEFORE_INSERT` BEFORE INSERT ON `usuarios_administradores` FOR EACH ROW
 BEGIN
 	if (not exists(select 1 
 			from usuarios 
@@ -1399,7 +1399,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_administradores_BEFORE_UPDATE` BEFORE UPDATE ON `usuarios_administradores` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_administradores_BEFORE_UPDATE` BEFORE UPDATE ON `usuarios_administradores` FOR EACH ROW
 BEGIN
 	if (not exists(select 1 
 			from usuarios 
@@ -1456,7 +1456,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_clientes_BEFORE_INSERT` BEFORE INSERT ON `usuarios_clientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_clientes_BEFORE_INSERT` BEFORE INSERT ON `usuarios_clientes` FOR EACH ROW
 BEGIN
 	if (not exists(select 1 
 			from usuarios 
@@ -1495,7 +1495,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_clientes_BEFORE_UPDATE` BEFORE UPDATE ON `usuarios_clientes` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `sistemarestaurantes`.`usuarios_clientes_BEFORE_UPDATE` BEFORE UPDATE ON `usuarios_clientes` FOR EACH ROW
 BEGIN
 	if (not exists(select 1 
 			from usuarios 
@@ -1655,7 +1655,7 @@ SET character_set_client = @saved_cs_client;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarCategoria`(in p_idAdmin int, in p_nombre nvarchar(50))
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarCategoria`(in p_idAdmin int, in p_nombre nvarchar(50))
     COMMENT 'Crea una nueva categoría de alimentos.'
 BEGIN
 	if (not exists (select 1
@@ -1707,7 +1707,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarCategoriaAdmitidaEnRestaurante`(in p_idAdmin int, in p_idRestaurante int, in p_idCategoria int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarCategoriaAdmitidaEnRestaurante`(in p_idAdmin int, in p_idRestaurante int, in p_idCategoria int)
     COMMENT 'Agrega una categoría de alimentos a la lista de categorías que administra un restaurante.'
 BEGIN
 	if (not exists (select 1
@@ -1754,7 +1754,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarCategoriaAIngrediente`(in p_idIngrediente int, in p_idCategoria int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarCategoriaAIngrediente`(in p_idIngrediente int, in p_idCategoria int)
     COMMENT 'Clasifica el ingrediente ingresado a la categoría ingresada.'
 BEGIN
 	declare exit handler for sqlexception
@@ -1782,7 +1782,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarDetalleMenuACarrito`(in p_idAdmin int, in p_idCliente int, in p_idMenu int, in p_cantidad int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarDetalleMenuACarrito`(in p_idAdmin int, in p_idCliente int, in p_idMenu int, in p_cantidad int)
     COMMENT 'Agrega la comida del menú al carrito de compras (orden temporal) del cliente para un restaurante.'
 BEGIN
 	if (not exists (select 1
@@ -1884,7 +1884,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarIngrediente`(in p_idAdmin int, in p_nombre nvarchar(50), in p_precioUnidad decimal(8,2),
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarIngrediente`(in p_idAdmin int, in p_nombre nvarchar(50), in p_precioUnidad decimal(8,2),
     in p_urlFoto nvarchar(200), in p_idCategoria int)
     COMMENT 'Agrega un nuevo ingrediente al sistema.'
 BEGIN
@@ -1941,7 +1941,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarIngredienteAInventario`(in p_idAdmin int, 
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarIngredienteAInventario`(in p_idAdmin int, 
 		in p_idRestaurante int, in p_idIngrediente int, 
         in p_cantidadDisponible decimal(13,3))
     COMMENT 'Agrega un nuevo ingrediente al inventario del restaurante.'
@@ -1994,7 +1994,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarIngredienteAPlatillo`(in p_idAdmin int, in p_idPlatillo int, in p_idIngrediente int, in p_cantidad decimal(10,3))
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarIngredienteAPlatillo`(in p_idAdmin int, in p_idPlatillo int, in p_idIngrediente int, in p_cantidad decimal(10,3))
     COMMENT 'Agrega un ingrediente a la receta de un platillo.'
 BEGIN
 	if (not exists (select 1
@@ -2041,7 +2041,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarPlatilloAMenuRestaurante`(in p_idAdmin int, in p_idRestaurante int, in p_idPlatillo int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarPlatilloAMenuRestaurante`(in p_idAdmin int, in p_idRestaurante int, in p_idPlatillo int)
     COMMENT 'Agrega un nuevo platillo al menú del restaurante.'
 BEGIN
 	if (not exists (select 1
@@ -2094,7 +2094,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarRestaurante`(in p_idAdmin int, in p_nombre nvarchar(50), in p_direccion nvarchar(200), in p_idCategoria int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarRestaurante`(in p_idAdmin int, in p_nombre nvarchar(50), in p_direccion nvarchar(200), in p_idCategoria int)
     COMMENT 'Agrega un nuevo restaurante en el sistema.'
 BEGIN
 	if (not exists (select 1
@@ -2146,7 +2146,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarUsuario`(in p_idAdmin int, in p_nombre nvarchar(50), in p_apellidos nvarchar(100), 
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarUsuario`(in p_idAdmin int, in p_nombre nvarchar(50), in p_apellidos nvarchar(100), 
 		in p_eMail nvarchar(50), in p_password nvarchar(20))
     COMMENT 'Registra a un nuevo usuario en el sistema.'
 BEGIN
@@ -2195,7 +2195,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarUsuarioAdministrador`(in p_idAdmin int, in p_nombre nvarchar(50), in p_apellidos nvarchar(100),
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarUsuarioAdministrador`(in p_idAdmin int, in p_nombre nvarchar(50), in p_apellidos nvarchar(100),
 		in p_eMail nvarchar(50), in p_password nvarchar(20))
     COMMENT 'Registra un nuevo usuario administrador al sistema.'
 BEGIN
@@ -2246,7 +2246,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_agregarUsuarioCliente`(in p_idAdmin int, in p_nombre nvarchar(50), in p_apellidos nvarchar(100), 
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_agregarUsuarioCliente`(in p_idAdmin int, in p_nombre nvarchar(50), in p_apellidos nvarchar(100), 
      in p_eMail nvarchar(50), in p_password nvarchar(20), in p_numeroTelefono decimal(8,0))
     COMMENT 'Registra un nuevo usuario cliente al sistema.'
 BEGIN
@@ -2297,7 +2297,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_asignarCategoriaAIngrediente`(in p_idAdmin int, in p_idIngrediente int, in p_idCategoria int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_asignarCategoriaAIngrediente`(in p_idAdmin int, in p_idIngrediente int, in p_idCategoria int)
     COMMENT 'Clasifica el ingrediente ingresado a la categoría ingresada.'
 BEGIN
 	if (not exists (select 1
@@ -2343,7 +2343,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_asignarUsuarioAdministrador`(in p_idAdmin int, in p_idUsuario int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_asignarUsuarioAdministrador`(in p_idAdmin int, in p_idUsuario int)
     COMMENT 'Asigna a un nuevo usuario derechos de administrador.'
 BEGIN
 	if (not exists (select 1
@@ -2394,7 +2394,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_asignarUsuarioCliente`(in p_idAdmin int, in p_idUsuario int, in p_numeroTelefono decimal(8,0))
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_asignarUsuarioCliente`(in p_idAdmin int, in p_idUsuario int, in p_numeroTelefono decimal(8,0))
     COMMENT 'Agrega un nuevo usuario cliente al sistema.'
 BEGIN
 	if (not exists (select 1
@@ -2445,7 +2445,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_borrarCarritoComprasClienteEnRestaurante`(in p_idRestaurante int, in p_idCliente int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_borrarCarritoComprasClienteEnRestaurante`(in p_idRestaurante int, in p_idCliente int)
     COMMENT 'Borra el carrito de compras del cliente en un restaurante.'
 BEGIN
 	if (not exists (select 1
@@ -2513,7 +2513,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_borrarDetalleCarritoComprasClienteEnRestaurante`(in p_idAdmin int, in p_idCliente int, in p_idMenu int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_borrarDetalleCarritoComprasClienteEnRestaurante`(in p_idAdmin int, in p_idCliente int, in p_idMenu int)
     COMMENT 'Borra un detalle del carrito de compras de un cliente.'
 BEGIN
 	if (not exists (select 1 from usuarios_administradores 
@@ -2587,7 +2587,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_borrarUsuario`(in p_idAdmin int, in p_idUsuario int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_borrarUsuario`(in p_idAdmin int, in p_idUsuario int)
     COMMENT 'Borra el usuario del sistema.'
 BEGIN
 	if (not exists (select 1 from usuarios_administradores 
@@ -2637,7 +2637,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_borrarUsuarioAdministrador`(in p_idAdmin int, in p_idAdminBorrado int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_borrarUsuarioAdministrador`(in p_idAdmin int, in p_idAdminBorrado int)
     COMMENT 'Borra un usuario administrador del sistema.'
 BEGIN
 	if (not exists (select 1 from usuarios_administradores 
@@ -2677,7 +2677,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_borrarUsuarioCliente`(in p_idAdmin int, in p_idClienteBorrado int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_borrarUsuarioCliente`(in p_idAdmin int, in p_idClienteBorrado int)
     COMMENT 'Borra un usuario cliente del sistema.'
 BEGIN
 	if (not exists (select 1 from usuarios_administradores 
@@ -2713,7 +2713,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cambiarIngrediente`(in p_idAdmin int, in p_idIngrediente int, in p_nuevo_nombre nvarchar(50), 
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_cambiarIngrediente`(in p_idAdmin int, in p_idIngrediente int, in p_nuevo_nombre nvarchar(50), 
     in p_nuevo_precioUnidad decimal(8,2), in p_nuevo_urlFoto nvarchar(200), 
     in p_nuevo_idCategoria int)
     COMMENT 'Modifica la información de un ingrediente en el sistema. Los parámetros son\n    opcionales; aquellos dejados en NULL no se modifican.'
@@ -2773,7 +2773,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cambiarInventarioRestaurante`(in p_idAdmin int, in p_idRestaurante int, in p_idIngrediente int, in p_nuevaCantidad decimal(13,3))
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_cambiarInventarioRestaurante`(in p_idAdmin int, in p_idRestaurante int, in p_idIngrediente int, in p_nuevaCantidad decimal(13,3))
     COMMENT 'Modifica el inventario de un ingrediente para un restaurante.'
 BEGIN
 	if (not exists (select 1
@@ -2826,7 +2826,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cambiarUsuarioCliente`(in p_idUsuarioModificador int, in p_idCliente int, in p_nuevo_nombre nvarchar(50), 
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_cambiarUsuarioCliente`(in p_idUsuarioModificador int, in p_idCliente int, in p_nuevo_nombre nvarchar(50), 
 		in p_nuevo_apellidos nvarchar(100), in p_nuevo_password nvarchar(20), 
 		in p_nuevo_numeroTelefono decimal(8,0)
     )
@@ -2896,7 +2896,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getBitacoraCambios`(in p_fechaInicio datetime(0) /* Opcional: Pasar NULL para omitir*/ , 
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getBitacoraCambios`(in p_fechaInicio datetime(0) /* Opcional: Pasar NULL para omitir*/ , 
 	in p_fechaFin datetime(0) /* Opcional: Pasar NULL para omitir*/ )
     COMMENT 'Muestra el contenido de la bitácora de cambios en un intervalo de tiempo opcional.'
 BEGIN
@@ -2933,7 +2933,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getCarritoComprasClienteRestaurante`(in p_idRestaurante int, in p_idCliente int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getCarritoComprasClienteRestaurante`(in p_idRestaurante int, in p_idCliente int)
     COMMENT 'Muestra el contenido del carrito del cliente (orden temporal).'
 BEGIN
 	if (not exists (select 1
@@ -2971,7 +2971,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getCategoriasAdmitidasRestaurante`(in p_idRestaurante int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getCategoriasAdmitidasRestaurante`(in p_idRestaurante int)
     COMMENT 'Obtiene la lista de categorías de ingredientes asociadas al restaurante.'
 BEGIN
 	if (not exists (select 1
@@ -3004,7 +3004,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getCategoriasIngredientesDeRestaurante`(in p_idRestaurante int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getCategoriasIngredientesDeRestaurante`(in p_idRestaurante int)
     COMMENT 'Obtiene una lista con las categorías de alimentos registradas para un restaurante.'
 BEGIN
 	if (not exists (select 1 
@@ -3038,7 +3038,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getDetallesOrdenCompra`(in p_idOrdenCompra int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getDetallesOrdenCompra`(in p_idOrdenCompra int)
     COMMENT 'Obtiene los detalles de platillos de una orden de compra realizada.'
 BEGIN
 	if (not exists (select 1 from ordenes_compra where id = p_idOrdenCompra)) then
@@ -3069,7 +3069,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getGananciasRestauranteEnDia`(in p_idFecha datetime(0))
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getGananciasRestauranteEnDia`(in p_idFecha datetime(0))
 BEGIN
 	if (p_idFecha > (select current_date)) then
 		signal	sqlstate '45000'
@@ -3097,7 +3097,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getInfoIngrediente`(in p_idIngrediente int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getInfoIngrediente`(in p_idIngrediente int)
     COMMENT 'Obtiene la información detallada de un ingrediente.'
 BEGIN
 	if (not exists (select 1 from ingredientes where id = p_idIngrediente)) then
@@ -3131,7 +3131,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getInfoOrdenCompra`(in p_idOrdenCompra int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getInfoOrdenCompra`(in p_idOrdenCompra int)
     COMMENT 'Obtiene la información básica de una orden de compra realizada.'
 BEGIN
 	if (not exists (select 1 from ordenes_compra where id = p_idOrdenCompra)) then
@@ -3160,7 +3160,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getInfoRestaurante`(in p_idRestaurante int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getInfoRestaurante`(in p_idRestaurante int)
     COMMENT 'Obtiene la información detallada de un restaurante.'
 BEGIN
 	if (not exists (select 1 from restauranres where id = p_idRestaurante)) then
@@ -3188,7 +3188,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getInfoUsuarioAdministrador`(in p_idAdministrador int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getInfoUsuarioAdministrador`(in p_idAdministrador int)
     COMMENT 'Obtiene la información de un administrador.'
 BEGIN
 	if (not exists (select 1 from usuarios 
@@ -3228,7 +3228,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getInfoUsuarioCliente`(in p_idCliente int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getInfoUsuarioCliente`(in p_idCliente int)
     COMMENT 'Obtiene la información de un cliente.'
 BEGIN
 	if (not exists (select 1 from usuarios 
@@ -3266,7 +3266,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getIngredientesPlatillo`(in p_idPlatillo int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getIngredientesPlatillo`(in p_idPlatillo int)
     COMMENT 'Obtiene una lista de todos los ingredientes utilizados en un platillo.'
 BEGIN
 	if (not exists (select 1
@@ -3300,7 +3300,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getInventarioRestaurante`(in p_idRestaurante int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getInventarioRestaurante`(in p_idRestaurante int)
     COMMENT 'Obtiene una lista con el inventario de un restaurante.'
 BEGIN
 	if (not exists (select 1 
@@ -3336,7 +3336,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getListaCategoriasAlimentos`()
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getListaCategoriasAlimentos`()
     COMMENT 'Obtiene una lista de las categorías de alimentos registradas.'
 BEGIN
 	select id, nombre
@@ -3357,7 +3357,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getListaEmisoresTarjetas`()
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getListaEmisoresTarjetas`()
     COMMENT 'Obtiene una lista con los emisores de tarjetas de crédito.'
 BEGIN
 	select id, nombre
@@ -3379,7 +3379,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getListaIngredientesAdmitidosDeRestaurante`(in p_idRestaurante int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getListaIngredientesAdmitidosDeRestaurante`(in p_idRestaurante int)
     COMMENT 'Obtiene una lista de los ingredientes que son admitidos para un restaurante.\n	Los ingredientes son admitidos si sus categorías están asociadas con el restaurante.'
 BEGIN
 	if (not exists (select 1
@@ -3425,7 +3425,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getListaIngredientesEnCategoria`(in p_idCategoria int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getListaIngredientesEnCategoria`(in p_idCategoria int)
     COMMENT 'Obtiene una lista de los ingredientes clasificados en una categoría.'
 BEGIN
 	if (not exists(select 1
@@ -3467,7 +3467,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getListaRestaurantes`()
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getListaRestaurantes`()
     COMMENT 'Obtiene una lista de los restaurantes registrados.'
 BEGIN
 	select id, nombre
@@ -3489,7 +3489,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getListaUsuariosAdministradores`()
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getListaUsuariosAdministradores`()
     COMMENT 'Obtiene una lista sencilla de los clientes registrados.'
 BEGIN
 	select u.id, u.nombre
@@ -3513,7 +3513,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getListaUsuariosClientes`()
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getListaUsuariosClientes`()
     COMMENT 'Obtiene una lista sencilla de los clientes registrados.'
 BEGIN
 	select u.id, u.nombre
@@ -3537,7 +3537,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getMenuRestaurante`(in p_idRestaurante int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getMenuRestaurante`(in p_idRestaurante int)
     COMMENT 'Obtiene el menú de un restaurante.'
 BEGIN
 	if (not exists(select 1
@@ -3573,7 +3573,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getOrdenesCompraCliente`(in p_idCliente int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getOrdenesCompraCliente`(in p_idCliente int)
     COMMENT 'Obtiene una lista con las órdenes de compra hechas por un cliente.'
 BEGIN
 	if (not	exists (select 1
@@ -3604,7 +3604,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getOrdenesCompraRestaurante`(in p_idRestaurante int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getOrdenesCompraRestaurante`(in p_idRestaurante int)
     COMMENT 'Obtiene una lista con todas las órdenes de compra realizadas por un restaurante.'
 BEGIN
 	if (not	exists (select 1
@@ -3635,7 +3635,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getRestaurantesDeCategoria`(in p_idCategoria int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getRestaurantesDeCategoria`(in p_idCategoria int)
     COMMENT 'Obtiene una lista de los restaurantes clasificados con una categoría de alimentos.'
 BEGIN
 	if (not exists (select 1
@@ -3667,7 +3667,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getTotalesCarritoComprasClienteRestaurante`(in p_idRestaurante int, in p_idCliente int)
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getTotalesCarritoComprasClienteRestaurante`(in p_idRestaurante int, in p_idCliente int)
     COMMENT 'Obtiene el total de la compra en el carrito de compras del cliente en el restaurante.'
 BEGIN
 	if (not exists (select 1
@@ -3710,7 +3710,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getVentasConIngrediente`(in p_idIngrediente int,
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getVentasConIngrediente`(in p_idIngrediente int,
 	 in p_idRestaurante int /* Opcionar: Pasar NULL para ignorar*/ ,
      in p_fechaInicio datetime(0) /* Opcionar: Pasar NULL para ignorar*/ ,
      in p_fechaFin datetime(0) /* Opcionar: Pasar NULL para ignorar*/
@@ -3770,7 +3770,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getVentasGananciasDia`(in p_fecha datetime(0))
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getVentasGananciasDia`(in p_fecha datetime(0))
     COMMENT 'Obtiene el reporte de ventas y ganancias de un día.'
 BEGIN
 	select	fechaConsultada, idRestaurante, NombreRestaurantes, cantidadOrdenes,
@@ -3795,7 +3795,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getVentasRestauranteConIngrediente`(in p_idIngrediente int,
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getVentasRestauranteConIngrediente`(in p_idIngrediente int,
 	 in p_idRestaurante int /* Opcionar: Pasar NULL para ignorar*/ ,
      in p_fechaInicio datetime(0) /* Opcionar: Pasar NULL para ignorar*/ ,
      in p_fechaFin datetime(0) /* Opcionar: Pasar NULL para ignorar*/
@@ -3855,7 +3855,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getVentasTotalesRestaurantes`(in p_fechaInicio datetime(0) /* Opcionar: Dejar NULL para omitir */ ,
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_getVentasTotalesRestaurantes`(in p_fechaInicio datetime(0) /* Opcionar: Dejar NULL para omitir */ ,
      in p_fechaFin datetime(0) /* Opcional: Dejar NULL para omitir */
      )
     COMMENT 'Consulta las ventas totales de los restaurantes en un intervalo específico.'
@@ -3892,7 +3892,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_loginUsuario`(in p_eMail nvarchar(50), in p_password nvarchar(20))
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_loginUsuario`(in p_eMail nvarchar(50), in p_password nvarchar(20))
     COMMENT 'Procedimiento que permite al usuario iniciar sesión.'
 BEGIN
 	if (not exists (select 1 from usuarios where (eMail = p_eMail))) then
@@ -3949,7 +3949,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_pagarOrdenConEfectivo`(in p_idRestaurante int, in p_idCliente int, in p_montoRecibido decimal(20,2))
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_pagarOrdenConEfectivo`(in p_idRestaurante int, in p_idCliente int, in p_montoRecibido decimal(20,2))
     COMMENT 'Realiza el pago de la orden de compra del cliente en un restaurante.'
 BEGIN
     if (not exists(select 1 from carritos_compras 
@@ -4050,7 +4050,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_pagarOrdenConTarjeta`(in p_idRestaurante int, in p_idCliente int, in p_idEmisorTarjeta int, 
+CREATE DEFINER=CURRENT_USER PROCEDURE `sp_pagarOrdenConTarjeta`(in p_idRestaurante int, in p_idCliente int, in p_idEmisorTarjeta int, 
 		in p_numeroAuth decimal(16,0))
     COMMENT 'Paga la orden de compra del cliente en un restaurante con tarjeta de crédito.'
 BEGIN
@@ -4141,7 +4141,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
 /*!50001 VIEW `vt_carritos_compras_clientes` AS select `cc`.`idCliente` AS `idCliente`,`mr`.`idRestaurante` AS `idRestaurante`,`mr`.`idPlatillo` AS `idPlatillo`,`mr`.`id` AS `idMenu`,`cc`.`cantidad` AS `cantidad`,`cp`.`nombrePlatillo` AS `nombrePlatillo`,`cp`.`precioTarjeta` AS `precioUnidadTarjeta`,`cp`.`precioEfectivo` AS `precioUnidadEfectivo`,(`cc`.`cantidad` * `cp`.`precioTarjeta`) AS `precioTarjetaDetalle`,(case when (`cd`.`IdCliente` is not null) then ((`cc`.`cantidad` * `cp`.`precioEfectivo`) * 0.65) else (`cc`.`cantidad` * `cp`.`precioEfectivo`) end) AS `precioEfectivoDetalle`,(case when (`cd`.`IdCliente` is not null) then ((`cc`.`cantidad` * `cp`.`precioEfectivo`) * 0.35) else 0 end) AS `descuentoEfectivoDetalle` from (((`carritos_compras` `cc` join `menu_restaurantes` `mr` on((`mr`.`id` = `cc`.`idMenu`))) join `vt_costos_platillos` `cp` on((`mr`.`idPlatillo` = `cp`.`idPlatillo`))) left join `vt_clientes_con_descuentos` `cd` on(((`cc`.`idCliente` = `cd`.`IdCliente`) and (`mr`.`idRestaurante` = `cd`.`IdRestaurante`)))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -4159,7 +4159,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
 /*!50001 VIEW `vt_clientes_con_descuentos` AS select `o`.`idCliente` AS `IdCliente`,`o`.`idRestaurante` AS `IdRestaurante`,sum(`p`.`totalDetalle`) AS `AcumuladoCompras` from (`ordenes_compra` `o` join `platillos_ordenes_compra` `p` on((`o`.`id` = `p`.`idOrden`))) where ((year(`o`.`fechaFactura`) = year((curdate() - interval 1 month))) and (month(`o`.`fechaFactura`) = month((curdate() - interval 1 month)))) group by `o`.`idRestaurante`,`o`.`idCliente` having (sum(`p`.`totalDetalle`) >= 20000) order by `o`.`idRestaurante`,`o`.`idCliente` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -4177,7 +4177,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
 /*!50001 VIEW `vt_costos_ingredientes_platillos` AS select `p`.`id` AS `idPlatillo`,`i`.`id` AS `idIngrediente`,`p`.`nombre` AS `NombrePlatillo`,`i`.`nombre` AS `NombreIngrediente`,`ip`.`cantidadIngrediente` AS `Cantidad`,cast((`ip`.`cantidadIngrediente` * `i`.`precioUnidad`) as decimal(20,2)) AS `precioIngrediente` from ((`ingredientes_platillos` `ip` join `ingredientes` `i` on((`i`.`id` = `ip`.`idIngrediente`))) join `platillos` `p` on((`p`.`id` = `ip`.`idPlatillo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -4195,7 +4195,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
 /*!50001 VIEW `vt_costos_ordenes_compra` AS select `o`.`id` AS `idOrden`,`c`.`idUsuario` AS `idCliente`,`r`.`id` AS `idRestaurante`,`u`.`nombre` AS `NombreCliente`,`r`.`nombre` AS `NombreRestaurante`,date_format(`o`.`fechaFactura`,'%d/%m/%Y %r') AS `fechaFactura`,cast(sum((`p`.`cantidad` * `p`.`precioUnidad`)) as decimal(20,2)) AS `subTotal`,cast(sum(`p`.`descuento`) as decimal(20,2)) AS `descuento`,cast(sum(`p`.`totalDetalle`) as decimal(20,2)) AS `total`,cast((sum(`p`.`totalDetalle`) - sum((`p`.`cantidad` * `p`.`precioUnidad`))) as decimal(20,2)) AS `ganancias` from ((((`usuarios_clientes` `c` join `usuarios` `u` on((`u`.`id` = `c`.`idUsuario`))) join `ordenes_compra` `o` on((`c`.`idUsuario` = `o`.`idCliente`))) join `restaurantes` `r` on((`r`.`id` = `o`.`idRestaurante`))) join `platillos_ordenes_compra` `p` on((`o`.`id` = `p`.`idOrden`))) group by `o`.`id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -4213,7 +4213,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
 /*!50001 VIEW `vt_costos_platillos` AS select `p`.`id` AS `idPlatillo`,`p`.`nombre` AS `nombrePlatillo`,cast(sum(`vt`.`precioIngrediente`) as decimal(32,2)) AS `precioBase`,cast(sum((`vt`.`precioIngrediente` * 0.10)) as decimal(32,2)) AS `gananciaTarjeta`,cast(sum((`vt`.`precioIngrediente` * 0.15)) as decimal(32,2)) AS `gananciaEfectivo`,cast(sum((`vt`.`precioIngrediente` * 1.10)) as decimal(32,2)) AS `precioTarjeta`,cast(sum((`vt`.`precioIngrediente` * 1.15)) as decimal(32,2)) AS `precioEfectivo` from (`vt_costos_ingredientes_platillos` `vt` join `platillos` `p` on((`vt`.`idPlatillo` = `p`.`id`))) group by `vt`.`idPlatillo` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -4231,7 +4231,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
 /*!50001 VIEW `vt_info_restaurantes` AS select `r`.`id` AS `idRestaurante`,`c`.`id` AS `idCategoria`,`r`.`nombre` AS `NombreRestaurante` from (`restaurantes` `r` join `categorias` `c` on((`c`.`id` = `r`.`idCategoria`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -4249,7 +4249,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013 DEFINER=CURRENT_USER SQL SECURITY DEFINER */
 /*!50001 VIEW `vt_reportes_diarios_ganancias` AS select `vt_costos_ordenes_compra`.`idRestaurante` AS `idRestaurante`,`vt_costos_ordenes_compra`.`NombreRestaurante` AS `NombreRestaurante`,date_format(`vt_costos_ordenes_compra`.`fechaFactura`,'%d/%m/%Y') AS `fechaConsultada`,count(`vt_costos_ordenes_compra`.`idOrden`) AS `cantidadOrdenes`,sum(`vt_costos_ordenes_compra`.`total`) AS `totalOrdenes`,sum(`vt_costos_ordenes_compra`.`ganancias`) AS `gananciasOrdenes` from `vt_costos_ordenes_compra` group by `vt_costos_ordenes_compra`.`idRestaurante`,date_format(`vt_costos_ordenes_compra`.`fechaFactura`,'%d/%m/%Y') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
