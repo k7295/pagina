@@ -14,7 +14,7 @@ USE `sistemarestaurantes`;
 /*!40103 SET TIME_ZONE = '-06:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0 */;
-/*!40101 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO' */;
+
 /*!40111 SET @OLD_SQL_NOTES = @@SQL_NOTES, SQL_NOTES = 0 */;
 
 --
@@ -352,8 +352,7 @@ DELIMITER ;;
   BEGIN
     IF (old.idCategoria != new.idCategoria)
     THEN
-      /* Borra los platillos de los menús de los restaurantes donde
-        la categoría no está soportada */
+      -- Borra los platillos de los menús de los restaurantes donde la categoría no está soportada 
       DELETE mr
       FROM menu_restaurantes mr
         INNER JOIN ingredientes_platillos ip
@@ -364,7 +363,7 @@ DELIMITER ;;
           ON cr.idCategoria = ci.idCategoria
       WHERE (ci.idCategoria = new.idCategoria) AND (cr.idCategoria IS NULL);
     END IF;
-  END;;
+  END */;;
 DELIMITER ;
 /*!50003 SET sql_mode = @saved_sql_mode */;
 /*!50003 SET character_set_client = @saved_cs_client */;
@@ -530,8 +529,7 @@ DELIMITER ;
 DELIMITER ;;
   /*!50003 CREATE */ /*!50017 DEFINER = CURRENT_USER */ /*!50003 TRIGGER `sistemarestaurantes`.`categorias_ingredientes_restaurantes_AFTER_DELETE` AFTER DELETE ON `categorias_ingredientes_restaurantes` FOR EACH ROW
   BEGIN
-    /* Borra los platillos de los menús de los restaurantes donde
-        la categoría no está soportada */
+    -- Borra los platillos de los menús de los restaurantes donde la categoría no está soportada
     DELETE mr
     FROM menu_restaurantes mr
       INNER JOIN ingredientes_platillos ip
@@ -542,7 +540,7 @@ DELIMITER ;;
         ON (ci.idCategoria = cr.idCategoria)
     WHERE (cr.idRestaurante = old.idRestaurante)
           AND (cr.idCategoria = old.idCategoria);
-  END;;
+  END */;;
 DELIMITER ;
 /*!50003 SET sql_mode = @saved_sql_mode */;
 /*!50003 SET character_set_client = @saved_cs_client */;
@@ -2386,8 +2384,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode = @@sql_mode */;
 /*!50003 SET sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */;
 DELIMITER ;;
-CREATE DEFINER = CURRENT_USER PROCEDURE `sp_agregarRestaurante`(IN p_idAdmin   INT, IN p_nombre NVARCHAR(50),
-                                                                IN p_direccion NVARCHAR(200), IN p_idCategoria INT)
+CREATE DEFINER = CURRENT_USER PROCEDURE `sp_agregarRestaurante`
+  (IN p_idAdmin   INT, IN p_nombre VARCHAR(50),
+   IN p_direccion VARCHAR(200), IN p_idCategoria INT)
   COMMENT 'Agrega un nuevo restaurante en el sistema.'
   BEGIN
     IF (NOT exists(SELECT 1
@@ -2410,6 +2409,7 @@ CREATE DEFINER = CURRENT_USER PROCEDURE `sp_agregarRestaurante`(IN p_idAdmin   I
         START TRANSACTION;
         INSERT INTO restaurantes (nombre, direccion, idCategoria)
         VALUES (p_nombre, p_direccion, p_idCategoria);
+
         SET idObtenido = (SELECT last_insert_id());
 
         /* La categoría del restaurante pasa a ser el primer tipo de ingredientes aceptado */
@@ -2421,7 +2421,7 @@ CREATE DEFINER = CURRENT_USER PROCEDURE `sp_agregarRestaurante`(IN p_idAdmin   I
             now(),
             p_idAdmin,
             concat('El administrador ', u.nombre, ' ', u.apellidos,
-                   ' agregó el restaurante ', r.nombre, ' en el sistema.',)
+                   ' agregó el restaurante ', r.nombre, ' en el sistema.')
           FROM usuarios u, restaurantes r
           WHERE (u.id = p_idAdmin) AND (r.id = idObtenido);
         COMMIT;
@@ -4942,8 +4942,6 @@ DELIMITER ;
 /*!50001 SET character_set_results = @saved_cs_results */;
 /*!50001 SET collation_connection = @saved_col_connection */;
 /*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE = @OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
