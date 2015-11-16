@@ -1,6 +1,7 @@
 <?php
+// Conexión a DB.
 $host = "localhost";
 $user = "root";
-$pw = "";
+$pw = "yakum0";
 $db = "sistemarestaurantes";
 ?>
