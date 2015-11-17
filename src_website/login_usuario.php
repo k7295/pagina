@@ -7,9 +7,10 @@ $query = "CALL sp_loginUsuario('$_POST[user]', '$_POST[pw]')";
 echo $query;
 echo "<br>";
 
-$registro = mysqli_query($con, $query) or die("Hubo un error en la consulta de la BD:" . mysqli_error());
+$registro = mysqli_query($con, $query) or die("Hubo un error en la consulta de la BD:" . mysqli_error($con));
 
-$row = mysqli_fetch_row($registro);
+
+$row = mysqli_fetch_row($registro);     // $row = [id, idUsuario, msg]
 
 if (mysqli_more_results($con))
     while (mysqli_next_result($con)) {
@@ -17,25 +18,20 @@ if (mysqli_more_results($con))
     };
 
 if (!strcmp($row[0], 'admin')) {
-    $query = "CALL SP_getInfoUsuarioAdministrador('" . $row['idAdministrador'] . "')";
-    $registro = mysqli_query($con, $query) or die("problemas en consulta:" . mysqli_error());
-    $row = mysqli_fetch_row($registro);
+    $query = "CALL SP_getInfoUsuarioAdministrador('" . $row[1] . "')";
+    $registroAdmin = mysqli_query($con, $query) or die("problemas en consulta:" . mysqli_error($con));
 
-    echo $row[0];
-    echo $row[1];
+    $rowAdmin = mysqli_fetch_row($registroAdmin);
+    echo json_encode($rowAdmin);
+
+
 } else {
     // Clientes
     $query = "CALL SP_getInfoUsuarioCliente('" . $row[1] . "')";
-    $registro = mysqli_query($con, $query) or die("Error en: $query" . mysqli_error());
-    $rawdata = array(); // creamos array
-    //guardamos en un array multidimensional todos los datos de la consulta
-    $i = 0;
+    $registroCliente = mysqli_query($con, $query) or die("Error en: $query" . mysqli_error($con));
 
-    while ($rows = mysqli_fetch_array($registro)) {
-        $rawdata[$i] = $rows;
-        $i++;
-    }
-    echo json_encode($rawdata);
+    $rowCliente = mysqli_fetch_row($registroCliente);
+    echo json_encode($rowAdmin);
 
 }
 ?>
